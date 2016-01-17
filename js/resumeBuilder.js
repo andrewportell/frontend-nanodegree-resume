@@ -1,3 +1,6 @@
+/* jshint forin: false */
+/* globals $, HTMLschoolStart */
+
 //Bio Information
 var bio = {
 	"name" : "Andrew Portell",
@@ -33,11 +36,11 @@ bio.display = function() {
 	$("#header").append(formattedBioPic, formattedWelcomeMsg);
 
 	if(bio.skills.length > 0) {
-			$("#header").append(HTMLskillsStart);
-			for(skill in bio.skills) {
-				formattedSkill = HTMLskills.replace("%data%", bio.skills[skill]);
-				$("#skills").append(formattedSkill);
-			}
+		$("#header").append(HTMLskillsStart);
+		for(skill in bio.skills) {
+			formattedSkill = HTMLskills.replace("%data%", bio.skills[skill]);
+			$("#skills").append(formattedSkill);
+		}
 	}
 };
 
@@ -65,14 +68,16 @@ var work = {
 };
 
 work.display = function() {
-	for(job in work.jobs) {
-		$("#workExperience").append(HTMLworkStart);
-		var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
-		var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
-		var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
-		var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
-		$(".work-entry:last").append(formattedEmployer + formattedTitle, formattedDates, formattedDescription);
-	}
+	if (work.jobs.length > 0) {
+		for(job in work.jobs) {
+			$("#workExperience").append(HTMLworkStart);
+			var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+			var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
+			var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
+			var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
+			$(".work-entry:last").append(formattedEmployer + formattedTitle, formattedDates, formattedDescription);
+		}
+	}	
 };
 
 work.display();
@@ -94,21 +99,23 @@ var projects = {
 };
 
 projects.display = function () {
-	for(project in projects.projects) {
-		$("#projects:last").append(HTMLprojectStart);
+	if (projects.projects.length > 0) {
+		for(project in projects.projects) {
+			$("#projects:last").append(HTMLprojectStart);
 
-		var formattedTitle = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
-		$(".project-entry:last").append(formattedTitle);
+			var formattedTitle = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
+			$(".project-entry:last").append(formattedTitle);
 
-		var formattedDates = HTMLprojectDates.replace("%data%", projects.projects[project].dates);
-		$(".project-entry:last").append(formattedDates);
+			var formattedDates = HTMLprojectDates.replace("%data%", projects.projects[project].dates);
+			$(".project-entry:last").append(formattedDates);
 
-		var formattedDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
-		$(".project-entry:last").append(formattedDescription);
+			var formattedDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
+			$(".project-entry:last").append(formattedDescription);
 
-		for(img in projects.projects[project].images){
-			var formattedImage = HTMLprojectImage.replace("%data%", projects.projects[project].images[img]);
-			$(".project-entry:last").append(formattedImage);
+			for(img in projects.projects[project].images){
+				var formattedImage = HTMLprojectImage.replace("%data%", projects.projects[project].images[img]);
+				$(".project-entry:last").append(formattedImage);
+			}
 		}
 	}
 };
@@ -148,25 +155,25 @@ education.display = function() {
   	if (education.schools.length > 0) {
 	    $("#education").append(HTMLschoolStart);
 	    for (i = 0; i < education.schools.length; i++) {
-		var schoolNameList = HTMLschoolName.replace("%data%", education.schools[i].name);
-		var schoolDegreeList = HTMLschoolDegree.replace("%data%", education.schools[i].degree);
-		var schoolNameAndDegree = schoolNameList + schoolDegreeList;
-		var schoolDegreeList = HTMLschoolDates.replace("%data%", education.schools[i].dates);
-		var schoolLocationList = HTMLschoolLocation.replace("%data%", education.schools[i].location);
-		var schoolMajorList = HTMLschoolMajor.replace("%data%", education.schools[i].major);
-		$(".education-entry:last").append(schoolNameAndDegree, schoolDegreeList, schoolLocationList, schoolMajorList);
-    }
-};
+			var schoolNameList = HTMLschoolName.replace("%data%", education.schools[i].name);
+			var schoolDegreeList = HTMLschoolDegree.replace("%data%", education.schools[i].degree);
+			var schoolNameAndDegree = schoolNameList + schoolDegreeList;
+			var schoolDateList = HTMLschoolDates.replace("%data%", education.schools[i].dates);
+			var schoolLocationList = HTMLschoolLocation.replace("%data%", education.schools[i].location);
+			var schoolMajorList = HTMLschoolMajor.replace("%data%", education.schools[i].major);
+			$(".education-entry:last").append(schoolNameAndDegree, schoolDegreeList, schoolDateList, schoolLocationList, schoolMajorList);
+    	}
+}
 
 	if (education.onlineCourses.length > 0) {
 		$(".education-entry:last").append(HTMLonlineClasses);
 		for (i = 0; i < education.onlineCourses.length; i++) {
-		var onlineTitleList = HTMLonlineTitle.replace("%data%", education.onlineCourses[i].title);
-		var onlineSchoolList = HTMLonlineSchool.replace("%data%", education.onlineCourses[i].school);
-		var onlineTitleAndSchoolName = onlineTitleList + onlineSchoolList;
-		var onlineDatesList = HTMLonlineDates.replace("%data%", education.onlineCourses[i].dates);
-		var onlineURLList = HTMLonlineURL.replace("%data%", education.onlineCourses[i].url);
-		$(".education-entry:last").append(onlineTitleAndSchoolName, onlineDatesList, onlineURLList);
+			var onlineTitleList = HTMLonlineTitle.replace("%data%", education.onlineCourses[i].title);
+			var onlineSchoolList = HTMLonlineSchool.replace("%data%", education.onlineCourses[i].school);
+			var onlineTitleAndSchoolName = onlineTitleList + onlineSchoolList;
+			var onlineDatesList = HTMLonlineDates.replace("%data%", education.onlineCourses[i].dates);
+			var onlineURLList = HTMLonlineURL.replace("%data%", education.onlineCourses[i].url);
+			$(".education-entry:last").append(onlineTitleAndSchoolName, onlineDatesList, onlineURLList);
     	}
   	}
 };
