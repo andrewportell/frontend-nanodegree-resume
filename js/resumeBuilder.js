@@ -12,7 +12,7 @@ var bio = {
         location: 'St Louis, MO'
     },
     welcomeMessage: 'Thank you for visiting my interactive resume.',
-    bioPic: 'images/eagle1_150x150.jpg',
+    biopic: 'images/eagle1_150x150.jpg',
     skills: ['HTML', 'CSS', 'JavaScript', 'Python']
 };
 
@@ -30,7 +30,7 @@ bio.display = function() {
     $("#topContacts").append(formattedMobile, formattedEmail, formattedTwitter, formattedGithub, formattedLocation);
     $("#footerContacts").append(formattedMobile, formattedEmail, formattedTwitter, formattedGithub, formattedLocation);
 
-    var formattedBioPic = HTMLbioPic.replace("%data%", bio.bioPic);
+    var formattedBioPic = HTMLbioPic.replace("%data%", bio.biopic);
     var formattedWelcomeMsg = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
     $("#header").append(formattedBioPic, formattedWelcomeMsg);
 
@@ -123,20 +123,20 @@ var education = {
         name: 'Jefferson College',
         location: 'Hillsboro, MO',
         degree: 'AAS',
-        date: '1998',
-        major: 'Industrial Automation',
+        dates: '1998',
+        majors: ['Industrial Automation'],
         url: 'http://www.jeffco.edu'
     }],
 
     "onlineCourses": [{
         school: 'Udacity',
         title: 'Introduction to Programming',
-        date: '2015',
+        dates: '2015',
         url: 'https://www.udacity.com'
     }, {
         school: 'Udacity',
         title: 'Front-End Web Developer',
-        date: '2016',
+        dates: '2016',
         url: 'https://www.udacity.com'
     }]
 };
@@ -148,13 +148,14 @@ education.display = function() {
             var schoolNameList = HTMLschoolName.replace("%data%", education.schools[i].name);
             var schoolDegreeList = HTMLschoolDegree.replace("%data%", education.schools[i].degree);
             var schoolNameAndDegree = schoolNameList + schoolDegreeList;
-            var schoolDateList = HTMLschoolDates.replace("%data%", education.schools[i].date);
+            var schooldatesList = HTMLschoolDates.replace("%data%", education.schools[i].dates);
             var schoolLocationList = HTMLschoolLocation.replace("%data%", education.schools[i].location);
-            var schoolMajorList = HTMLschoolMajor.replace("%data%", education.schools[i].major);
+            var schoolMajorList = HTMLschoolMajor.replace("%data%", education.schools[i].majors[0]);
             var onlineURLList = HTMLonlineURL.replace("%data%", education.schools[i].url);
-            $(".education-entry:last").append(schoolNameAndDegree, schoolDateList, schoolLocationList, schoolMajorList, onlineURLList);
+            $(".education-entry:last").append(schoolNameAndDegree, schooldatesList, schoolLocationList, schoolMajorList, onlineURLList);
         }
     }
+
 
     if (education.onlineCourses.length > 0) {
         $(".education-entry:last").append(HTMLonlineClasses);
@@ -162,7 +163,7 @@ education.display = function() {
             var onlineTitleList = HTMLonlineTitle.replace("%data%", education.onlineCourses[i].title);
             var onlineSchoolList = HTMLonlineSchool.replace("%data%", education.onlineCourses[i].school);
             var onlineTitleAndSchoolName = onlineTitleList + onlineSchoolList;
-            var onlineDatesList = HTMLonlineDates.replace("%data%", education.onlineCourses[i].date);
+            var onlineDatesList = HTMLonlineDates.replace("%data%", education.onlineCourses[i].dates);
             var onlineURLList = HTMLonlineURL.replace("%data%", education.onlineCourses[i].url);
             $(".education-entry:last").append(onlineTitleAndSchoolName, onlineDatesList, onlineURLList);
         }
